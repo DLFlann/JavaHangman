@@ -12,19 +12,24 @@ class Prompter {
     public boolean promptForGuess() 
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a letter:  ");
-        String guessInput = scanner.nextLine();
-        char guess = guessInput.charAt(0);
         boolean isHit = false;
-        try
+        boolean isAcceptable = false;
+        do
         {
-            isHit = game.applyGuess(guess);
-        } 
-        catch (IllegalArgumentException iae)
-        {
-            System.out.println(iae.getMessage());
-        }
-        
+            System.out.print("Enter a letter:  ");
+            String guessInput = scanner.nextLine();
+            char guess = guessInput.charAt(0);
+            
+            try
+            {
+                isHit = game.applyGuess(guess);
+                isAcceptable = true;
+            } 
+            catch (IllegalArgumentException iae)
+            {
+                System.out.printf("%s. Please try again.%n", iae.getMessage());
+            }
+        } while (!isAcceptable);
         return isHit;
     }
 
