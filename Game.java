@@ -5,17 +5,26 @@ class Game {
     private String hits;
     private String misses;
 
-    public Game(String answer) {
+    public Game(String answer) 
+    {
         this.answer = answer;
         hits = "";
         misses = "";
     }
 
-    public boolean applyGuess(char letter) { 
+    public boolean applyGuess(char letter) 
+    { 
+        if (misses.indexOf(letter) != -1 || hits.indexOf(letter) != -1) 
+        {
+            throw new IllegalArgumentException(letter + " has already been guessed");
+        }
         boolean isHit = answer.indexOf(letter) != -1;
-        if (isHit) {
+        if (isHit) 
+        {
             hits += letter;
-        } else {
+        } 
+        else 
+        {
             misses += letter;
         }
         return isHit;
@@ -23,9 +32,11 @@ class Game {
 
     public String getCurrentProgress() {
         String progress = "";
-        for (char letter : answer.toCharArray()) {
+        for (char letter : answer.toCharArray()) 
+        {
             char display = '-';
-            if (hits.indexOf(letter) != -1) {
+            if (hits.indexOf(letter) != -1) 
+            {
                 display = letter;
             }
             progress += display;
@@ -33,7 +44,8 @@ class Game {
         return progress;
     }
 
-    public int getRemainingTries() {
+    public int getRemainingTries() 
+    {
         return MAX_MISSES - misses.length();
     }
 }
