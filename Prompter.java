@@ -17,12 +17,10 @@ class Prompter {
         do
         {
             System.out.print("Enter a letter:  ");
-            String guessInput = scanner.nextLine();
-            char guess = guessInput.charAt(0);
-            
+            String guessInput = scanner.nextLine();           
             try
             {
-                isHit = game.applyGuess(guess);
+                isHit = game.applyGuess(guessInput);
                 isAcceptable = true;
             } 
             catch (IllegalArgumentException iae)
